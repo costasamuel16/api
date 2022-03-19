@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>API Whatsapp</title>
+	<meta content="Envie mensagens via WhatsApp automaticamente." name="description" />
+	<meta content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" name="viewport" />
+	<link href="./assets/icon.svg" rel="icon" type="image/svg" />
+	<link href="./assets/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<header>
+<div class="logo"><img src="./assets/logo.png" />
+</div>
+<br>
+<br>
+<br>
+<br>
+
+
+<p>Envie requisições e mensagens via WhatsApp.</p>
+
+
+</header>
+<main>
+
+
+<div class="qr-wrapper">
+<div class="card">
+<div class="title"; align="center">QR CODE SCAN</div>
+
+<div class="body"><img alt="loading" id="qrcode" src="./assets/loader.gif" /></div>
+
+
+
+<div id="status"; class="title"; align="center"</div>
+
+</div>
+</div>
+
+</section>
+
+<meta http-equiv='refresh' content='50'>
+
+</main>
+
+
+<footer>
+<p title="criado em 5 de março de 2021 - ">criado com &nbsp;<span>&hearts;</span>&nbsp;por&nbsp;<a href="https://afarhansib.github.io">afarhansib</a> e modificado por <a href="https://instagram.com/costa_samuel16">SAMUKA 🖥️</a></p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.js" crossorigin="anonymous"></script> <script>
+			const qrcode = document.getElementById("qrcode")
+			const socket = io()
+		
+
+			socket.on("qr", src => {
+				qrcode.setAttribute("src", src)
+				qrcode.setAttribute("alt", "qrcode")
+			})
+
+			socket.on("qrstatus", src => {
+				qrcode.setAttribute("src", src)
+				qrcode.setAttribute("alt", "loading")
+				
+			})
+
+			socket.on("log", log => {
+				console.log(log)
+				document.getElementById("status").innerHTML = log;
+			   
+			
+			}) 
+			
+			socket.on("open", open => {
+				document.getElementById("status").innerHTML = open;
+				document.getElementById("status").src += '';
+			})
+			
+			socket.on("close", close => {
+				document.getElementById("status").innerHTML = close;
+				document.getElementById("status").src += '';
+			})
+		</script></body>
+</html>
